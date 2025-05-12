@@ -111,7 +111,7 @@
 }
 
 .disaster-map {
-  height: 400px;
+  height: 450px;
   width: 100%;
   border-radius: 0.5rem;
   overflow: hidden;
@@ -119,4 +119,40 @@
 
 .stat-card {
   @apply p-4 rounded-lg transition-all duration-200;
+}
+
+.dashboard-wrapper {
+  @apply min-h-screen bg-[#0c172a] pb-8;
+}
+
+.metrics-card {
+  @apply bg-white rounded-lg p-4;
+}
+
+.metrics-value {
+  @apply text-4xl font-bold;
+}
+
+.metrics-label {
+  @apply text-sm text-muted-foreground;
+}
+
+.incident-card {
+  @apply bg-white rounded-lg p-4 mb-3 border-l-4 flex items-center gap-3 cursor-pointer hover:bg-gray-50 transition-colors;
+}
+
+.summary-card {
+  @apply bg-white rounded-lg p-4 flex justify-between items-center;
+}
+
+.summary-value {
+  @apply text-3xl font-bold;
+}
+
+.summary-label {
+  @apply text-sm text-muted-foreground mb-1;
+}
+
+.summary-reports {
+  @apply text-xs text-muted-foreground;
 }

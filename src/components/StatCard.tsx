@@ -6,30 +6,27 @@ interface StatCardProps {
   title: string;
   value: string | number;
   change?: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   status?: 'emergency' | 'warning' | 'stable';
+  className?: string;
 }
 
-const StatCard = ({ title, value, change, icon, status = 'stable' }: StatCardProps) => {
+const StatCard = ({ title, value, change, icon, status = 'stable', className }: StatCardProps) => {
   return (
-    <div className={cn("stat-card border", status)}>
-      <div className="flex justify-between">
-        <div>
-          <p className="text-muted-foreground text-sm font-medium">{title}</p>
-          <p className="text-2xl font-bold mt-1">{value}</p>
-          {change && (
-            <p className={cn(
-              "text-xs flex items-center mt-1",
-              change.startsWith('+') ? "text-success" : "text-destructive"
-            )}>
-              {change}
-            </p>
-          )}
-        </div>
-        <div>
-          {icon}
-        </div>
+    <div className={cn("metrics-card", className)}>
+      <p className="metrics-label">{title}</p>
+      <div className="flex justify-between items-start">
+        <p className="metrics-value">{value}</p>
+        {icon && <div className="mt-1">{icon}</div>}
       </div>
+      {change && (
+        <p className={cn(
+          "text-xs mt-1",
+          change.startsWith('+') ? "text-success" : "text-destructive"
+        )}>
+          {change}
+        </p>
+      )}
     </div>
   );
 };

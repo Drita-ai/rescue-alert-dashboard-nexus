@@ -2,94 +2,152 @@
 import React from 'react';
 import DashboardHeader from '@/components/DashboardHeader';
 import DisasterMap from '@/components/DisasterMap';
-import DisasterIncidentCard from '@/components/DisasterIncidentCard';
-import WeatherAlerts from '@/components/WeatherAlerts';
-import QuickActions from '@/components/QuickActions';
+import IncidentCard from '@/components/IncidentCard';
 import StatCard from '@/components/StatCard';
-import { AlertTriangle, Shield, MapPin, Flag } from 'lucide-react';
+import SummaryCard from '@/components/SummaryCard';
+import { AlertTriangle, MapPin, Filter, ChevronDown } from 'lucide-react';
 
 const Index = () => {
-  // These would come from your API or data source in a real application
   const incidents = [
     {
-      title: 'Coastal Flooding',
-      location: 'Pacific Coast, Bay Area',
-      time: 'Started 2 hours ago',
-      type: 'Flood',
-      severity: 'high',
-      status: 'active',
+      title: 'Flood Warning',
+      location: 'Jackson, MSs',
+      description: 'Warning from-Culdish Flood at',
+      time: '12 min',
+      type: 'flood' as const
     },
     {
-      title: 'Forest Fire',
-      location: 'Northern Woods, Mountain Region',
-      time: 'Started 6 hours ago',
-      type: 'Fire',
-      severity: 'medium',
-      status: 'monitoring',
+      title: 'Wildfire Spread',
+      location: 'Redding, CA',
+      description: 'Wildfire near, Redding, Wednesday',
+      time: '26 min',
+      type: 'fire' as const
     },
     {
-      title: 'Landslide',
-      location: 'Highway 101, Mile 126',
-      time: 'Occurred yesterday',
-      type: 'Landslide',
-      severity: 'low',
-      status: 'resolved',
+      title: 'Emergency Medical Supplies',
+      location: 'San Juan, PU',
+      description: 'Emergency medical supplies fodd. water, H/X',
+      time: '42 min',
+      type: 'medical' as const
+    },
+    {
+      title: '6.3 Ruauke Strikes',
+      location: 'San Francisco, CA',
+      description: 'An earthquake strike, nr-Francisco, California, an hour ao',
+      time: '1 hour',
+      type: 'earthquake' as const
     },
   ];
 
   return (
-    <div className="min-h-screen bg-background pb-8">
+    <div className="dashboard-wrapper">
       <div className="container mx-auto px-4 py-6">
         <DashboardHeader />
         
         {/* Stats Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-4 gap-4 mb-6">
           <StatCard 
-            title="Active Incidents" 
-            value={7} 
-            change="+2 from yesterday" 
-            icon={<AlertTriangle className="h-8 w-8 text-destructive opacity-80" />}
-            status="emergency"
+            title="Total Incidents" 
+            value={184}
           />
-          <StatCard 
-            title="Affected Areas" 
-            value={12} 
-            icon={<MapPin className="h-8 w-8 text-primary opacity-80" />}
-          />
-          <StatCard 
-            title="Response Teams" 
-            value={18} 
-            change="+5 deployed" 
-            icon={<Shield className="h-8 w-8 text-primary opacity-80" />}
-          />
-          <StatCard 
-            title="Alerts Issued" 
-            value={23} 
-            change="+8 today" 
-            icon={<Flag className="h-8 w-8 text-warning opacity-80" />}
-            status="warning"
-          />
+          <div className="metrics-card">
+            <p className="metrics-label">Disaster Type Breakdown</p>
+            <div className="flex justify-between items-end">
+              <p className="metrics-value">141</p>
+              <div className="flex gap-1 items-end h-8">
+                <div className="h-full w-2 bg-blue-500 rounded"></div>
+                <div className="h-3/4 w-2 bg-red-500 rounded"></div>
+                <div className="h-1/2 w-2 bg-orange-500 rounded"></div>
+                <div className="h-2/3 w-2 bg-cyan-500 rounded"></div>
+                <div className="h-4/5 w-2 bg-pink-500 rounded"></div>
+              </div>
+            </div>
+          </div>
+          <div className="metrics-card">
+            <p className="metrics-label">Most Affected Regions</p>
+            <div className="flex items-center justify-between mt-2">
+              <p className="text-lg font-medium">California</p>
+              <ChevronDown className="h-4 w-4" />
+            </div>
+            <p className="text-lg font-medium mt-1">Texas</p>
+          </div>
+          <div className="metrics-card">
+            <p className="metrics-label">Source</p>
+            <div className="flex items-center justify-between mt-2">
+              <p className="text-lg font-medium">All</p>
+              <ChevronDown className="h-4 w-4" />
+            </div>
+            <div className="flex items-center justify-between mt-1">
+              <p className="text-lg font-medium">All dates</p>
+              <ChevronDown className="h-4 w-4" />
+            </div>
+          </div>
         </div>
         
         {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-3 gap-6">
           {/* Left Column - Map */}
-          <div className="lg:col-span-2">
+          <div className="col-span-2">
+            {/* Filters */}
+            <div className="bg-[#1a2c48] p-4 rounded-t-lg text-white mb-0">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <span className="font-medium mr-2">Filters</span>
+                  <span className="text-xs bg-gray-700 px-2 py-1 rounded">Tur</span>
+                </div>
+                <span className="text-sm">10:32 AM</span>
+              </div>
+              <div className="flex gap-4 mt-3">
+                <div className="bg-[#2c3e50] px-3 py-2 rounded flex justify-between items-center w-32">
+                  <span>Flood</span>
+                  <ChevronDown className="h-4 w-4" />
+                </div>
+                <div className="bg-[#2c3e50] px-3 py-2 rounded flex justify-between items-center w-32">
+                  <span>An Leve</span>
+                  <ChevronDown className="h-4 w-4" />
+                </div>
+              </div>
+            </div>
             <DisasterMap />
           </div>
           
-          {/* Right Column - Quick Actions */}
-          <div>
-            <QuickActions />
+          {/* Right Column - Incident Cards */}
+          <div className="bg-white rounded-lg overflow-hidden h-min">
+            <div className="space-y-0">
+              {incidents.map((incident, index) => (
+                <IncidentCard 
+                  key={index} 
+                  title={incident.title}
+                  location={incident.location}
+                  description={incident.description}
+                  time={incident.time}
+                  type={incident.type}
+                />
+              ))}
+            </div>
           </div>
         </div>
         
-        {/* Bottom Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
-          {/* Weather Alerts */}
-          <div className="col-span-full lg:col-span-3">
-            <WeatherAlerts />
-          </div>
+        {/* Bottom Row - Summary Cards */}
+        <div className="grid grid-cols-3 gap-4 mt-6">
+          <SummaryCard 
+            title="Medical / Rescue Requests" 
+            value={53} 
+            reports={53}
+            icon={<AlertTriangle className="h-4 w-4 text-gray-500" />}
+          />
+          <SummaryCard 
+            title="Infrastructure Damage" 
+            value={28} 
+            reports={28}
+            icon={<AlertTriangle className="h-4 w-4 text-gray-500" />}
+          />
+          <SummaryCard 
+            title="People Affected" 
+            value={75} 
+            reports={75}
+            icon={<AlertTriangle className="h-4 w-4 text-gray-500" />}
+          />
         </div>
       </div>
     </div>
