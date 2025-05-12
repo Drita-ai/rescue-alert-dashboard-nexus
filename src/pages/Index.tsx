@@ -86,21 +86,8 @@ const Index = () => {
         
         {/* Bottom Row */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
-          {/* Recent Incidents */}
-          <div className="lg:col-span-2">
-            <div className="border rounded-lg p-4">
-              <h2 className="text-lg font-semibold mb-4">Recent Incidents</h2>
-              {incidents.map((incident, index) => (
-                <DisasterIncidentCard 
-                  key={index} 
-                  {...incident as any} 
-                />
-              ))}
-            </div>
-          </div>
-          
           {/* Weather Alerts */}
-          <div>
+          <div className="col-span-full lg:col-span-3">
             <WeatherAlerts />
           </div>
         </div>
